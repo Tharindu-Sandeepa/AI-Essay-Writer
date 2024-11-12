@@ -1,12 +1,12 @@
 import React, { useState,useEffect } from 'react';
-import axios from 'axios';
 import { saveAs } from 'file-saver';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { FaCopy, FaFilePdf, FaFileAlt } from 'react-icons/fa';
-import html2pdf from 'html2pdf.js';
-import MagicButton from './MagicButton.js';
+import html2pdf from 'html3pdf';
+import MagicButton from '../components/MagicButton.js';
 import { AnimatedBackground } from 'animated-backgrounds';
+import { generateEssay } from '../ai/AI.js';
 
 const EssayGenerator = () => {
   const [topic, setTopic] = useState('');
@@ -16,14 +16,13 @@ const EssayGenerator = () => {
   const [editorContent, setEditorContent] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
 
-  // Auto-scroll to top when component mounts
+
   useEffect(() => {
-    window.scrollTo(0, 0); // Scrolls to the top
+    window.scrollTo(0, 0); 
   }, []);
 
-  const generateEssay = async () => {
+  const generateEssayHandler = async () => {
     if (!topic) {
       alert("Please enter the essay topic.");
       return;
@@ -38,14 +37,8 @@ const EssayGenerator = () => {
     };
 
     try {
-      const response = await axios.post(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`,
-        { contents: [{ parts: [{ text: JSON.stringify(requestBody) }] }] }
-      );
-
-      const essay = response.data.candidates[0].content.parts[0].text;
-      setEditorContent(essay); 
-
+      const essay = await generateEssay(requestBody); //  reusable function for future dev
+      setEditorContent(essay);
     } catch (error) {
       console.error('Error generating essay:', error);
     } finally {
@@ -55,15 +48,47 @@ const EssayGenerator = () => {
 
   const handleDownloadPdf = () => {
     const editor = document.querySelector('.ql-editor');
+    
+    const headings = editor.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    headings.forEach((heading) => {
+      switch (heading.tagName) {
+        case 'H1':
+          heading.style.fontSize = '24px';
+          heading.style.fontWeight = 'bold';
+          break;
+        case 'H2':
+          heading.style.fontSize = '20px';
+          heading.style.fontWeight = 'bold';
+          break;
+        case 'H3':
+          heading.style.fontSize = '18px';
+          heading.style.fontWeight = 'bold';
+          break;
+        default:
+          heading.style.fontSize = '16px';
+          heading.style.fontWeight = 'bold';
+          break;
+      }
+    });
+  
+    const paragraphs = editor.querySelectorAll('p, span');
+    paragraphs.forEach((p) => {
+      p.style.fontSize = '12px'; 
+      p.style.lineHeight = '1.5';
+    });
+  
+    editor.style.padding = '10px';
+    editor.style.margin = '10px';
+  
     const options = {
-      margin: 1,
+      margin: 0.5, 
       filename: `${topic}_essay.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
-
-    html2pdf().set(options).from(editor).save();
+  
+    html2pdf().from(editor).set(options).save();
   };
 
   const handleDownloadText = () => {
@@ -73,7 +98,7 @@ const EssayGenerator = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    generateEssay();
+    generateEssayHandler();
   };
 
   const handleCopyText = () => {
@@ -83,11 +108,11 @@ const EssayGenerator = () => {
 
   return (
     <div className="bg-none min-h-screen flex flex-col items-center p-4 font-popins justify-center -mt-1">
-       <AnimatedBackground animationName="geometricShapes"  style={{ opacity: 0.3 }} />
+      <AnimatedBackground animationName="geometricShapes" style={{ opacity: 0.3 }} />
       <div className="flex flex-col md:flex-row w-full max-w-7xl space-y-6 md:space-y-0 md:space-x-8">
         {/* Input Section */}
         <form onSubmit={handleSubmit} className="relative bg-white p-5 pt-8 rounded-lg shadow-md w-full md:w-1/3">
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">Topic</h2>
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">Topic</h2>
           <h2 className="block text-gray-700 font-medium mb-1 text-left">Enter your Topic</h2>
           <p className="text-gray-500 text-xs mb-3 text-left">Enter the main subject</p>
           <textarea
@@ -140,18 +165,18 @@ const EssayGenerator = () => {
               className="w-full"
             />
             <p className="text-gray-600 text-sm text-center mt-1">{wordCount} words</p>
-            </div>
+          </div>
 
-{/* Fixed Position Generate Button */}
-<div className='mt-10 flex justify-center'>
-  <MagicButton
-    className="text-white px-4 py-2 rounded-md transition"
-    onClick={handleSubmit}
-    isGenerating={isGenerating}
-    label={isGenerating ? "Generating..." : "Generate"}
-  />
-</div>
+          <div className='mt-10 flex justify-center'>
+            <MagicButton
+              className="text-white px-4 py-2 rounded-md transition"
+              onClick={handleSubmit}
+              isGenerating={isGenerating}
+              label={isGenerating ? "Generating..." : "Generate"}
+            />
+          </div>
         </form>
+
 
         {/* Output Section */}
         <div className="bg-white p-3 md:p-6 rounded-lg shadow-md w-full md:w-2/3 flex flex-col">
@@ -174,7 +199,7 @@ const EssayGenerator = () => {
               onChange={setEditorContent}
               placeholder="Your generated essay will appear here..."
               theme="snow"
-              className="h-[34rem] w-full text-lg" // Increased font size
+              className="h-[34rem] w-full text-lg" 
             />
           </div>
 

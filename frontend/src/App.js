@@ -2,11 +2,11 @@
 
 import React, { useRef } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import EssayGenerator from "./EssayGenerator"; // Import the EssayGenerator component
+import EssayGenerator from "./pages/EssayGenerator.js"; // Import the EssayGenerator component
 import "./App.css";
-import FooterComponent from "./FooterComponent";
-import AppBar from "./AppBar";
-import HomePage from "./HomePage";
+import FooterComponent from "./components/FooterComponent.js";
+import AppBar from "./components/AppBar.js";
+import HomePage from "./pages/HomePage.js";
 
 function App() {
   const footerRef = useRef(null);

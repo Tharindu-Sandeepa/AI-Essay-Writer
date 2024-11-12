@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { FaBars, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import logo from './logo.png';
+import logo from '../assets/logo.png';
 
 const AppBar = ({ scrollToFooter }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Check for scroll position to add blur effect
+  
   const handleScroll = () => {
     if (window.scrollY > 10) {
       setIsScrolled(true);
@@ -33,7 +33,7 @@ const AppBar = ({ scrollToFooter }) => {
         isScrolled ? 'bg-white/5 backdrop-blur-lg' : 'bg-white'
       }`}
     >
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-6 py-4  flex justify-between items-center">
         {/* Logo and Title */}
         <div className="flex items-center space-x-3">
           <img

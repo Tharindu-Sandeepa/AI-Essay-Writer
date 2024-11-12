@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 const BigButton = ({ onClick, label }) => {
-  const [stars, setStars] = useState(Array.from({ length: 8 })); // 8 stars for animation
+  const [stars] = useState(Array.from({ length: 8 })); // 8 stars for animation
 
   return (
     <button
       className="big-button"
       onClick={onClick}
       style={{
-        padding: '16px 80px', // Default padding for medium screens
-        fontSize: '20px', // Default font size
+        padding: '16px 80px', 
+        fontSize: '20px',
         borderRadius: '50px',
         backgroundColor: '#3B82F6',
         color: '#ffffff',
@@ -50,7 +50,7 @@ const BigButton = ({ onClick, label }) => {
         ))}
       </div>
 
-      {/* CSS for star animation and responsiveness */}
+     
       <style>
         {`
           @keyframes float {

@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { FaFilePdf } from 'react-icons/fa';
+
 
 const MagicButton = ({ onClick, label }) => {
-  const [stars, setStars] = useState(Array.from({ length: 8 })); // 8 stars
+  const [stars] = useState(Array.from({ length: 8 })); 
 
   return (
     <button
       className="magic-button"
       onClick={onClick}
       style={{
-        padding: '10px 70px', // Increase width, lower height
-        fontSize: '16px', // Adjust font size if needed
-        borderRadius: '8px', // Optional: round the corners
-        position: 'relative', // Ensure the stars are positioned relative to the button
-        overflow: 'hidden', // Prevent stars from going outside the button
+        padding: '10px 70px', 
+        fontSize: '16px', 
+        borderRadius: '8px', 
+        position: 'relative', 
+        overflow: 'hidden', 
       }}
     >
       {label}
