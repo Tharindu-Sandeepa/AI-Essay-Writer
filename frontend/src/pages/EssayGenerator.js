@@ -92,7 +92,10 @@ const EssayGenerator = () => {
   };
 
   const handleDownloadText = () => {
-    const blob = new Blob([editorContent], { type: "text/plain;charset=utf-8" });
+
+    const filteredContent = editorContent.replace(/<\/?[^>]+(>|$)/g, '').replace(/[\x7F]/g, '');
+  
+    const blob = new Blob([filteredContent], { type: "text/plain;charset=utf-8" });
     saveAs(blob, `${topic}_essay.txt`);
   };
 
@@ -102,7 +105,8 @@ const EssayGenerator = () => {
   };
 
   const handleCopyText = () => {
-    navigator.clipboard.writeText(editorContent);
+    const filteredContent = editorContent.replace(/<\/?[^>]+(>|$)/g, '').replace(/[\x7F]/g, '');
+    navigator.clipboard.writeText(filteredContent);
     alert("Copied to clipboard!");
   };
 
