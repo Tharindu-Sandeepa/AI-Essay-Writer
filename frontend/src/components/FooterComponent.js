@@ -14,7 +14,7 @@ const Footer = React.forwardRef((props, ref) => {
             About Ai<span className="text-blue-500">Pen</span>
           </span>
             <p className="text-gray-600">
-            The AiPen is a web app that uses advanced AI technology to help users generate high-quality essays quickly and easily. With a simple and user-friendly interface, users can input a topic or prompt, and the AI produces a well-structured essay. The app offers customization options for essay style and format, and once the essay is generated, users can download it or copy it for further use. Perfect for students, professionals, or anyone in need of fast and reliable essay writing, the AI Essay Writer streamlines the process, saving time while delivering quality content.
+            The AiPen is a web app that quickly generates high-quality essays based on user-provided topics. It offers customization options and allows users to download or copy the generated content, making it a time-saving tool for students and professionals
             </p>
           </div>
 
