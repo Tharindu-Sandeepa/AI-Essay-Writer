@@ -35,7 +35,7 @@ const AppBar = ({ scrollToFooter }) => {
     >
       <div className="container mx-auto px-6 py-4  flex justify-between items-center">
         {/* Logo and Title */}
-        <div className="flex items-center space-x-3">
+        <Link to={'/'} className="flex items-center space-x-3">
           <img
             src={logo}
             alt="AiPen Logo"
@@ -44,7 +44,7 @@ const AppBar = ({ scrollToFooter }) => {
           <span className="text-2xl font-bold text-gray-800">
             Ai<span className="text-blue-500">Pen</span>
           </span>
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8 text-gray-700">

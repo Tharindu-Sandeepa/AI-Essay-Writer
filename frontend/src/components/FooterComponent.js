@@ -20,7 +20,7 @@ const Footer = React.forwardRef((props, ref) => {
 
          
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Get in Touch</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Contact Me</h2>
             <div className="space-y-4">
               <a
                 href="https://www.linkedin.com/in/tharindu-sandeepa99/"

@@ -137,6 +137,9 @@ const EssayGenerator = () => {
             >
               <option value="Formal">Formal</option>
               <option value="Informal">Informal</option>
+              <option value="Simple English">Simple English</option>
+              <option value="Description for a post">Description for a post</option>
+              <option value="Story">Story</option>
               <option value="Persuasive">Persuasive</option>
               <option value="Descriptive">Descriptive</option>
               <option value="Narrative">Narrative</option>
