@@ -14,16 +14,9 @@ AiPen is a web application designed to help users generate high-quality essays o
 
 ---
 
-
-### Home Page
 ![Home Page](./about/1.png)
 
-### Essay Generator Page
-![Essay Generator](./screenshots/essay-generator.png)
-
-### Download Essay Option
-![Download Option](./screenshots/download.png)
-
-### Mobile Responsive View
-![Mobile View](./screenshots/mobile-view.png)
+![Home Page](./about/2.png)
+![Home Page](./about/3.png)
+![Home Page](./about/1.png)
 
