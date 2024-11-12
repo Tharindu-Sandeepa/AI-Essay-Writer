@@ -14,7 +14,7 @@ const Footer = React.forwardRef((props, ref) => {
             About Ai<span className="text-blue-500">Pen</span>
           </span>
             <p className="text-gray-600">
-              This app is designed to provide a seamless user experience for visually impaired individuals by integrating AI-powered object identification and voice-controlled interactions. Features include a voice-based quiz, detailed explanations using Google Generative AI, and a convenient history for chat and questions.
+            The AiPen is a web app that uses advanced AI technology to help users generate high-quality essays quickly and easily. With a simple and user-friendly interface, users can input a topic or prompt, and the AI produces a well-structured essay. The app offers customization options for essay style and format, and once the essay is generated, users can download it or copy it for further use. Perfect for students, professionals, or anyone in need of fast and reliable essay writing, the AI Essay Writer streamlines the process, saving time while delivering quality content.
             </p>
           </div>
 
